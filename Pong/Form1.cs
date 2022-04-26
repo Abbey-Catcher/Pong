@@ -167,8 +167,7 @@ namespace Pong
             }
 
             //Check if ball hits either player
-            //If it does change the direction and place the ball in front of the player hit 
-
+            //If it does change the direction and place the ball in front of the player hit
             if (ball.X <= 0)
             {
                 //if ball hits left wall, gives point to other player
