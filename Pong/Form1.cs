@@ -160,6 +160,7 @@ namespace Pong
                 ballYSpeed *= -1;  // or: ballYSpeed  =  -ballYSpeed; 
             }
 
+            //checks if ball hit right wall
             if (ball.X > this.Width - ball.Width)
             {
                 ballXSpeed *= -1;
@@ -170,6 +171,7 @@ namespace Pong
 
             if (ball.X <= 0)
             {
+                //if ball hits left wall, gives point to other player
                 if (playerTurn == 1)
                 {
                     player2Score++;
@@ -181,6 +183,7 @@ namespace Pong
                     p1ScoreLabel.Text = $"{player1Score}";
                 }
 
+                //resets positions
                 ball.X = 295;
                 ball.Y = 195;
 
@@ -189,43 +192,22 @@ namespace Pong
                 player1.X = 10;
                 player2.X = 10;
             }
-            if (player1.IntersectsWith(ball))
+
+            //ball intersects with player, switches player turn and changes ball direction
+            //playerTurn == 1 - makes player 2 not be able to hit ball
+            if (player1.IntersectsWith(ball) && playerTurn == 1)
             {
                 ballXSpeed *= -1;
                 ball.X = player1.X + ball.Width;
                 playerTurn = 2;
             }
-            else if (player2.IntersectsWith(ball))
+            //playerTurn == 2 - makes player 1 not be able to hit ball
+            else if (player2.IntersectsWith(ball) && playerTurn == 2)
             {
                 ballXSpeed *= -1;
                 ball.X = player2.X + ball.Width;
                 playerTurn = 1;
             }
-
-            //check if a player missed the ball and if true add 1 to score of other player  
-            //if (ball.X < 0)
-            //{
-            //    player2Score++;
-            //    p2ScoreLabel.Text = $"{player2Score}";
-
-            //    ball.X = 295;
-            //    ball.Y = 195;
-
-            //    player1.Y = 130;
-            //    player2.Y = 200;
-            //}
-            //else if (ball.X > this.Width)
-            //{
-            //    player1Score++;
-            //    p1ScoreLabel.Text = $"{player1Score}";
-
-            //    ball.X = 295;
-            //    ball.Y = 195;
-
-            //    player1.Y = 130;
-            //    player2.Y = 200;
-            //}
-
 
             // check score and stop game if either player is at 3 
             if (player1Score == 3)
